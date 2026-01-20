@@ -34,7 +34,13 @@ function App() {
 
   const fetchUsageData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/usage');
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/usage`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const result = await response.json();
       
       if (result.status === 'success') {
@@ -195,7 +201,7 @@ function App() {
                   <td>{user.active_hours}h</td>
                   <td>
                     <div className="language-tags">
-                      {Object.entries(user.language_breakdown).map(([lang, count]) => (
+                      {Object.entries(user.language_breakdown || {}).map(([lang, count]) => (
                         <span key={lang} className="language-tag">
                           {lang}: {count}
                         </span>

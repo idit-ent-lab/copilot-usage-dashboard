@@ -47,6 +47,12 @@ A web-based analytics dashboard for visualizing GitHub Copilot usage statistics.
 
 The backend will start on `http://localhost:5000`
 
+**Note:** By default, the server runs in development mode. To run in production mode, set the environment variable:
+```bash
+export FLASK_DEBUG=false
+python app.py
+```
+
 ### Backend API Endpoints
 
 - `GET /api/usage` - Returns mock Copilot usage statistics
@@ -94,6 +100,11 @@ The API returns data in the following format:
    ```
 
 The frontend will open automatically in your browser at `http://localhost:3000`
+
+**Configuration:** To connect to a different backend URL, create a `.env` file in the frontend directory:
+```bash
+REACT_APP_API_URL=http://your-backend-url:5000
+```
 
 ### Frontend Build
 
